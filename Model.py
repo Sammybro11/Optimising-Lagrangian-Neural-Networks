@@ -20,8 +20,9 @@ class LNN(nn.Module):
         return self.Linear_Stack(state).squeeze(-1) # This will give out a [N]
 
 def LNN_Euler_Lagrange(lnn, theta, theta_dot):
-    theta.requires_grad = True
-    theta_dot.requires_grad = True
+    theta = theta.detach().clone().requires_grad_(True)
+    theta_dot = theta_dot.detach().clone().requires_grad_(True)
+
     L = lnn(theta, theta_dot) # here you get that [N]
 
     grad_theta, grad_theta_dot = torch.autograd.grad(
