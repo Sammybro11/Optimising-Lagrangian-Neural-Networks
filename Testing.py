@@ -19,6 +19,8 @@ epochs = 50
 
 # Training Model
 LNN_1 = Model.LNN()
+LNN_1.load_state_dict(torch.load("saves/save01.pth"))
+
 Training.trainer(LNN_1, state_initial, length, time_max, dt, window, epochs, batch_size)
 
 # Measuring True Output on new initial state
