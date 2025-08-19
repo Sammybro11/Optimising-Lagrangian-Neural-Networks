@@ -33,6 +33,20 @@ theta_arr, theta_dot_arr, time_arr = Simulation.Solver(
 )
 
 test_states = np.stack([theta_arr, theta_dot_arr], axis=-1)  # [T, 2]
+# Saving Model
+# 1. Create models directory
+MODEL_PATH = Path("saves")
+MODEL_PATH.mkdir(parents=True, exist_ok=True)
+
+# 2. Create model save path
+MODEL_NAME = f"save01.pth"
+MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME
+
+# 3. Save the model state dict
+print(f"Saving model to: {MODEL_SAVE_PATH}")
+torch.save(obj=LNN_1.state_dict(),  # only saving the state_dict() only saves the models learned parameters
+           f=MODEL_SAVE_PATH)
+
 # Testing Model
 
 device = torch.device("cuda" if torch.cuda.is_available()
