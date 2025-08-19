@@ -54,7 +54,7 @@ def trainer(lnn_model, state_initial, length, t_max, dt, window_size, epochs, ba
                 theta_dot_batch = theta_dot_batch + theta_ddot_batch * dt
                 theta_batch = theta_batch + theta_dot_batch*dt
 
-            prediction_batch = torch.stack([theta_batch, theta_dot_batch], dim = -1)
+            prediction_batch = torch.cat([theta_batch, theta_dot_batch], dim = -1)
             loss = loss_fn(prediction_batch, targets_batch)
             loss.backward()
             optimizer.step()
