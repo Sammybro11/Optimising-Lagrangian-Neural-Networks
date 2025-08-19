@@ -35,5 +35,5 @@ def LNN_Euler_Lagrange(lnn, theta, theta_dot):
     # Jacobian should be a matrix however since my function L is a scalar
     # I can directly use the vectors always I think for now...
 
-    theta_ddot = (grad_theta - Jacobian * theta_dot)/Hessian
+    theta_ddot = (grad_theta - Jacobian * theta_dot)/(Hessian + 1e-8)
     return (theta_dot, theta_ddot)
