@@ -6,14 +6,14 @@ import Training
 import numpy as np
 import torch
 import matplotlib.pyplot as plt
-
+from pathlib import Path
 # Initialization
 
-state_initial = np.array([np.pi/6, 0])
+state_initial = np.array([np.pi/10, 3])
 length = 1.0
-window = 3
+window = 10
 batch_size = 32
-time_max = 20
+time_max = 50
 dt = 0.01
 epochs = 50
 
@@ -26,7 +26,7 @@ Training.trainer(LNN_1, state_initial, length, time_max, dt, window, epochs, bat
 # Measuring True Output on new initial state
 
 # Choose a new initial state for fair evaluation
-test_initial_state = np.array([np.pi/4, 0.5])  # Different from training init
+test_initial_state = np.array([np.pi/8, 2])  # Different from training init
 
 theta_arr, theta_dot_arr, time_arr = Simulation.Solver(
     Simulation.Euler_Lagrange_Equation,

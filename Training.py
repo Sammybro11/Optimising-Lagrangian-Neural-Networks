@@ -61,7 +61,7 @@ def trainer(lnn_model, state_initial, length, t_max, dt, window_size, epochs, ba
 
             epoch_loss += loss.item() * len(inputs_batch)
         avg_loss = epoch_loss / len(dataset)
-        print(f"Epoch {epoch + 1}/{epochs} - Loss: {avg_loss:.5f}")
+        print(f"Epoch {epoch + 1}/{epochs} - Loss: {avg_loss:.8f}")
 
     print("Training complete.")
 
