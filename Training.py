@@ -90,12 +90,3 @@ def trainer(lnn_model, state_initial, length, t_max, dt, window_size, epochs, ba
 # tensor_targets = torch.tensor(targets, dtype=torch.float32)
 # dataset = TensorDataset(tensor_inputs, tensor_targets)
 # loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-#
-# for inputs_batch, targets_batch in loader:
-#     theta_batch = inputs_batch[:, 0]
-#     print(len(inputs_batch))
-
-#
-# print("State Array: ", state_arr)
-# print("Inputs Array: ",inputs)
-# print("Target Array: ",targets)
