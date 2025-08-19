@@ -14,6 +14,15 @@ def rk4_step(function, state, time, dt, *args):
     state_next = state + (dt/6.0) * (k1 + 2 * k2 + 2 * k3 + k4)
     return state_next
 
+def rk4_step_LNN(function, lnn, theta, theta_dot, dt):
+    k1 = function(lnn, theta, theta_dot)
+    k2 = function(lnn, theta + 0.5 * dt * k1[0], theta_dot + 0.5 * dt * k1[1])
+    k3 = function(lnn, theta + 0.5 * dt * k2[0], theta_dot + 0.5 * dt * k2[1])
+    k4 = function(lnn, theta + dt * k3[0], theta_dot + dt * k3[1])
+    theta_next = theta + (dt / 6.0) * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0])
+    theta_dot_next = theta_dot + (dt/6.0) * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1])
+    return (theta_next, theta_dot_next)
+
 def Solver(Equation, theta_initial, theta_dot_initial, t_max, dt, *args):
     number_of_steps = int(t_max/dt)
     t_eval = np.linspace(0, t_max, number_of_steps)
@@ -36,7 +45,7 @@ if debug == True:
     theta_history, theta_dot_history, t_eval = Solver(
         Euler_Lagrange_Equation,
         np.pi / 6,  # 30 degrees initial angle
-        0,          # Initial velocity
+        6.05,          # Initial velocity
         10,         # Max time
         0.01,       # Time step
         1.0         # Pendulum length (passed as *args)
