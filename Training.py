@@ -46,8 +46,8 @@ def trainer(lnn_model, state_initial, length, t_max, dt, window_size, epochs, ba
             inputs_batch, targets_batch = inputs_batch.to(device), targets_batch.to(device)
 
             optimizer.zero_grad()
-            theta_batch = inputs_batch[:, 0]
-            theta_dot_batch = inputs_batch[:, 1]
+            theta_batch = inputs_batch[:, 0].unsqueeze(-1)
+            theta_dot_batch = inputs_batch[:, 1].unsqueeze(-1)
 
             for i in range(window_size):
                 theta_dot_batch, theta_ddot_batch = Model.LNN_Euler_Lagrange(lnn_model, theta_batch, theta_dot_batch)
