@@ -36,4 +36,4 @@ def LNN_Euler_Lagrange(lnn, theta, theta_dot):
     # I can directly use the vectors always I think for now...
 
     theta_ddot = (grad_theta - Jacobian * theta_dot)/Hessian
-    return np.array([theta_dot, theta_ddot])
+    return (theta_dot, theta_ddot)
