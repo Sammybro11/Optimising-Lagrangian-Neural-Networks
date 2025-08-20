@@ -1,6 +1,6 @@
-# Model Comparison and Simulation Framework
+# Lagrangian Neural Networks for Pendulum Dynamics
 
-This repository provides an end-to-end framework for **training, testing, simulating, and comparing machine learning models**. It is structured into modular components so that training, evaluation, and comparison can be performed seamlessly.
+This repository implements **Lagrangian Neural Networks (LNNs)** and provides a framework for their **training, optimization, and analysis** on simple pendulum systems. The goal is to leverage physics-informed machine learning to better capture the dynamics of mechanical systems compared to traditional black-box neural networks.
 
 ---
 
@@ -17,53 +17,52 @@ pip install -r requirements.txt
 ## 📂 Project Structure
 
 .
-├── Model.py              # Defines model architectures
-├── Training.py           # Handles model training
-├── Testing.py            # Handles evaluation and testing
-├── Simulation.py         # Runs simulations with trained models
-├── Model_Comparison.ipynb# Jupyter notebook for experiments & analysis
+├── Model.py              # Defines neural network and LNN architectures
+├── Training.py           # Training pipeline for standard NN and LNN models
+├── Testing.py            # Evaluation of trained models on pendulum dynamics
+├── Simulation.py         # Simulations using trained models on pendulum trajectories
+├── Model_Comparison.ipynb# Notebook for experiments, plots, and analysis
 
 ---
 
 ## 🚀 Concepts Used
 
-### 1. Machine Learning Models
-The `Model.py` file defines neural network architectures (likely using PyTorch).  
-Concepts include:
-- Feedforward layers (nn.Linear) for fully connected networks.
-- Activation functions (e.g., ReLU, Sigmoid, Tanh) to introduce non-linearity.
-- Loss functions (MSE, Cross-Entropy, etc.) for optimization.
-- Optimizers (SGD, Adam) for gradient descent updates.
+### 1. Lagrangian Mechanics
+- Classical mechanics describes systems using the **Lagrangian**:  
+  L(q, q̇) = T(q̇) − V(q)  
+  where `T` is kinetic energy and `V` is potential energy.  
+- The **Euler–Lagrange equations** yield the equations of motion:  
+  d/dt (∂L/∂q̇) − ∂L/∂q = 0.  
+- This approach guarantees **energy-consistent dynamics**, unlike unconstrained neural nets.
 
-### 2. Training Loop
-Defined in `Training.py`.  
-Key concepts:
-- Forward pass: Input data → model → predictions.
-- Loss calculation: Compare predictions vs. ground truth.
-- Backward pass: Compute gradients using backpropagation.
-- Optimizer step: Update parameters to minimize loss.
-- Epochs: Multiple passes over the dataset to improve learning.
+### 2. Lagrangian Neural Networks (LNNs)
+- Instead of predicting accelerations directly, the network **learns the Lagrangian** from data.  
+- From the learned Lagrangian, accelerations are derived using the Euler–Lagrange equations.  
+- This ensures predictions **respect conservation laws** and exhibit better physical generalization.
 
-### 3. Testing & Evaluation
-Implemented in `Testing.py`.  
-Concepts include:
-- Inference mode (`torch.no_grad()`) to disable gradient calculation for efficiency.
-- Metrics: Accuracy, RMSE, MAE, or domain-specific metrics.
-- Generalization: Ensures models perform well on unseen data.
+### 3. Optimization & Training
+- Implemented in `Training.py` using standard ML workflows:
+  - Forward pass: compute predicted dynamics.
+  - Loss function: MSE between predicted and true accelerations/trajectories.
+  - Backward pass: gradients via autograd.
+  - Optimizer: Adam/SGD updates model parameters.
+- Regularization may be applied to stabilize training.
 
-### 4. Simulation
-Implemented in `Simulation.py`.  
-Concepts:
-- Applying trained models to synthetic or real-world scenarios.
-- Possibly integrates with physics-based or mathematical simulations.
-- Helps validate if the model captures underlying system dynamics.
+### 4. Testing & Evaluation
+- `Testing.py` runs evaluation of models on test trajectories.  
+- Metrics include trajectory error, energy conservation, and phase-space reconstruction quality.  
+- Comparisons between standard Neural Networks and LNNs highlight advantages of physics-informed learning.
 
-### 5. Model Comparison
-The `Model_Comparison.ipynb` notebook ties everything together:
-- Trains multiple models.
-- Evaluates performance on test sets.
-- Compares metrics (loss curves, accuracy plots).
-- Provides visual insights into which model is better suited.
+### 5. Simulation
+- `Simulation.py` uses trained models to simulate pendulum dynamics.  
+- Can roll out trajectories forward in time and compare with ground-truth ODE solutions.  
+- Demonstrates long-term stability of LNN predictions versus standard neural networks.
+
+### 6. Model Comparison
+- `Model_Comparison.ipynb` runs experiments comparing:
+  - Standard Neural Networks (black-box).  
+  - Lagrangian Neural Networks (physics-informed).  
+- Provides plots of loss curves, predicted vs. true trajectories, and conserved energy analysis.
 
 ---
 
@@ -71,46 +70,45 @@ The `Model_Comparison.ipynb` notebook ties everything together:
 
 1. Train a Model  
    python Training.py  
-   This trains the model defined in `Model.py` and saves checkpoints.  
+   Trains either a standard NN or an LNN on pendulum trajectory data.  
 
 2. Test a Model  
    python Testing.py  
-   Runs evaluation on the trained model and prints metrics.  
+   Evaluates the trained model and computes error metrics.  
 
 3. Run Simulations  
    python Simulation.py  
-   Uses trained models in simulation environments.  
+   Simulates pendulum dynamics using the trained model and visualizes results.  
 
 4. Compare Models  
    jupyter notebook Model_Comparison.ipynb  
-   This provides plots and comparative analysis.  
+   Provides detailed comparisons of NN vs. LNN performance.  
 
 ---
 
 ## 📊 Example Workflow
 
-1. Define a new model in `Model.py`.  
-2. Train using `Training.py`.  
-3. Test using `Testing.py`.  
-4. Run simulations with `Simulation.py`.  
-5. Compare results in `Model_Comparison.ipynb`.  
+1. Define models in `Model.py` (choose NN or LNN).  
+2. Train using `Training.py` on pendulum dataset.  
+3. Evaluate trained models with `Testing.py`.  
+4. Run simulations to validate dynamical stability.  
+5. Use `Model_Comparison.ipynb` to analyze which approach works best.  
 
 ---
 
-## 🧠 Key Machine Learning Concepts Reinforced
-- Model architecture design.  
-- Training/evaluation loops.  
-- Loss functions and optimizers.  
-- Generalization and overfitting.  
-- Model benchmarking and simulation.  
+## 🧠 Key Ideas Reinforced
+- Neural networks can approximate dynamical systems, but **physics-informed architectures** (LNNs) perform better.  
+- Lagrangian formalism ensures learned dynamics respect conservation laws.  
+- LNNs are more robust to extrapolation and long-term simulations.  
+- Applications extend beyond pendulums to **robotics, molecular dynamics, and physics simulations**.  
 
 ---
 
 ## 📝 Future Improvements
-- Add more architectures (CNNs, RNNs, Transformers).  
-- Integrate hyperparameter tuning (Optuna/Sklearn GridSearch).  
-- Extend simulation environments for domain-specific problems.  
-- Save results in a structured logging format (TensorBoard, WandB).  
+- Extend experiments to **double pendulums** and chaotic systems.  
+- Add **Hamiltonian Neural Networks (HNNs)** for comparison.  
+- Use advanced optimization (e.g., symplectic integrators, physics-informed loss terms).  
+- Integrate logging and visualization with TensorBoard or Weights & Biases.  
 
 ---
 
