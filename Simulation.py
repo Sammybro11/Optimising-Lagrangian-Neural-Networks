@@ -44,9 +44,9 @@ def Solver(Equation, theta_initial, theta_dot_initial, t_max, dt, *args):
 if debug == True:
     theta_history, theta_dot_history, t_eval = Solver(
         Euler_Lagrange_Equation,
-        np.pi / 6,  # 30 degrees initial angle
-        6.05,          # Initial velocity
-        10,         # Max time
+        -np.pi / 1.5,  # 30 degrees initial angle
+        0,          # Initial velocity
+        20,         # Max time
         0.01,       # Time step
         1.0         # Pendulum length (passed as *args)
     )
