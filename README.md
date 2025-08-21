@@ -113,4 +113,4 @@ pip install -r requirements.txt
 ---
 
 ## 📜 License
-MIT License. Free to use and modify.
+Apache License 2.0. Free to use and modify.
