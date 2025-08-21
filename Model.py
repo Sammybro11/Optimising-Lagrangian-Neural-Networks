@@ -82,5 +82,5 @@ class BaselineNN(nn.Module):
                             activation_fn=activation_fn)
 
     def forward(self, theta, theta_dot):
-        state_nn = torch.cat([theta, theta_dot], dim=-1)
-        return self.net(state_nn).squeeze(-1)
+        state_nn = torch.cat([theta, theta_dot], dim=-1) # [Batch , 2]
+        return self.net(state_nn).squeeze(-1) # [Batch, 2]

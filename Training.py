@@ -146,7 +146,9 @@ def BaselineNN_Train(nn_model, states_initial, length, t_max, dt, window_size, e
             theta_dot_batch = inputs_batch[:, 1].unsqueeze(-1)
 
             for i in range(window_size):
-                theta_batch, theta_dot_batch = nn_model(theta_batch, theta_dot_batch)
+                out = nn_model(theta_batch, theta_dot_batch)  # [Batch , 2]
+                theta_batch = out[:, 0].unsqueeze(-1)  # [Batch, 1]
+                theta_dot_batch = out[:, 1].unsqueeze(-1)  # [Batch, 1]
 
             prediction_batch = torch.cat([theta_batch, theta_dot_batch], dim = -1)
             loss = loss_fn(prediction_batch, targets_batch)
