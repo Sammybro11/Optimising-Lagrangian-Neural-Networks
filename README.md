@@ -8,8 +8,8 @@ This repository implements **Lagrangian Neural Networks (LNNs)** and provides a 
 
 Clone this repository:
 
-git clone <git@github.com:Sammybro11/LNNs-for-Simple-Pendulum.git>
-cd <LNNs-for-Simple-Pendulum>
+git clone git@github.com:Sammybro11/LNNs-for-Simple-Pendulum.git
+cd LNNs-for-Simple-Pendulum
 
 ---
 
