@@ -6,11 +6,10 @@ This repository implements **Lagrangian Neural Networks (LNNs)** and provides a 
 
 ## ⚙️ Installation
 
-Clone this repository and install dependencies:
+Clone this repository:
 
-git clone <repo-url>
-cd <repo>
-pip install -r requirements.txt
+git clone <git@github.com:Sammybro11/LNNs-for-Simple-Pendulum.git>
+cd <LNNs-for-Simple-Pendulum>
 
 ---
 
