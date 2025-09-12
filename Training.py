@@ -6,6 +6,7 @@ import numpy as np
 from pathlib import Path
 import Simulation as sim
 import Model as Model
+from tqdm import tqdm
 
 
 def LNN_Workout(lnn_model, states_initial, length, t_max, dt, window_size, epochs, batch_size,
@@ -68,7 +69,7 @@ def LNN_Workout(lnn_model, states_initial, length, t_max, dt, window_size, epoch
     # Training loop
     epoch = 0
     avg_loss = 0
-    for epoch in range(epochs):
+    for epoch in tqdm(range(epochs), desc="Training LNN Model: "):
         epoch_loss = 0.0
         for inputs_batch, targets_batch in loader:
             inputs_batch, targets_batch = inputs_batch.to(device), targets_batch.to(device)
@@ -89,8 +90,6 @@ def LNN_Workout(lnn_model, states_initial, length, t_max, dt, window_size, epoch
 
             epoch_loss += loss.item() * len(inputs_batch)
         avg_loss = epoch_loss / len(dataset)
-        if epoch % 5 == 0:
-            print(f"Epoch {epoch + 1}/{epochs} - Loss: {avg_loss:.8f}")
 
     torch.save({
         "epoch": epoch + 1,
@@ -136,7 +135,7 @@ def BaselineNN_Train(nn_model, states_initial, length, t_max, dt, window_size, e
     optimizer = optim.Adam(nn_model.parameters(), lr=1e-3)
     loss_fn = nn.MSELoss()
 
-    for epoch in range(epochs):
+    for epoch in tqdm(range(epochs), desc="Training NN Model: "):
         epoch_loss = 0.0
         for inputs_batch, targets_batch in loader:
             inputs_batch, targets_batch = inputs_batch.to(device), targets_batch.to(device)
@@ -157,8 +156,6 @@ def BaselineNN_Train(nn_model, states_initial, length, t_max, dt, window_size, e
 
             epoch_loss += loss.item() * len(inputs_batch)
         avg_loss = epoch_loss / len(dataset)
-        if epoch % 5 == 0:
-            print(f"Epoch {epoch + 1}/{epochs} - Loss: {avg_loss:.8f}")
 
 
 
