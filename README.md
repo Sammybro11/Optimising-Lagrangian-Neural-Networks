@@ -69,13 +69,11 @@ By applying Chain Rule
 ```math
 \nabla^2_{\dot{\phi} \dot{\phi}} L \, \ddot{\phi} = \nabla_\phi L - \nabla^2_{\phi \dot{\phi}} L \, \dot{\phi} - \frac{\partial}{\partial t} \nabla_{\dot{\phi}} L
 ```
+Therefore,
 ```math
 \ddot{\phi} = [\nabla^2_{\dot{\phi} \dot{\phi}} L]^{-1} [\nabla_\phi L - \nabla^2_{\phi \dot{\phi}} L \, \dot{\phi} - \frac{\partial}{\partial t} \nabla_{\dot{\phi}} L]
 
 ```
-
-
-Multiply both sides by the inverse (if it exists) of the Hessian $`\nabla^2_{\dot{\phi} \dot{\phi}} L `$:
 
 
 
