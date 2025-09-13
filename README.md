@@ -44,42 +44,36 @@ pip install -r requirements.txt
 ## Theory
 Let us consider the case of a simple Pendulum
 
-The **Lagrangian** $ L(\phi, \dot{\phi}, t) $ describes the motion of a system, where:
-- $ \phi $ = Vertical angle of Pendulum from support
-- $ \dot{\phi} $ = Angular velocity of Pendulum from support
-- $t $ = Time variable
+The **Lagrangian** `L(\phi, \dot{\phi}, t)` describes the motion of a system, where:
+- ` \phi ` = Vertical angle of Pendulum from support
+- `\dot{\phi} ` = Angular velocity of Pendulum from support
+- `t` = Time variable
 
 The Euler-Lagrange equation is:
 ```math
-$$
 \frac{d}{dt} \nabla_{\dot{\phi}} L = \nabla_\phi L
-$$
 ```
 where:
-- $ \nabla_\phi L $ is the gradient w.r.t. $ \phi $
-- $ \nabla_{\dot{\phi}} L $ is the gradient w.r.t. $ \dot{\phi} $
+- `\nabla_\phi L` is the gradient w.r.t. `\phi`
+- `\nabla_{\dot{\phi}} L` is the gradient w.r.t. `\dot{\phi}`
 
-We want to solve for $ \ddot{\phi} $:
+We want to solve for `\ddot{\phi}`:
 ```maths
-$$
 \frac{d}{dt} \nabla_{\dot{\phi}} L = \nabla_\phi L
-$$
 ```
 By applying Chain Rule
 ```math
-$$
+
 \frac{\partial}{\partial t} \nabla_{\dot{\phi}} L + \nabla^2_{\dot{\phi} \dot{\phi}} L \, \ddot{\phi} + \nabla^2_{\phi \dot{\phi}} L \, \dot{\phi} = \nabla_\phi L
-$$
-$$
+\\
 \nabla^2_{\dot{\phi} \dot{\phi}} L \, \ddot{\phi} = \nabla_\phi L - \nabla^2_{\phi \dot{\phi}} L \, \dot{\phi} - \frac{\partial}{\partial t} \nabla_{\dot{\phi}} L
-$$
-$$
+\\
 \ddot{\phi} = [\nabla^2_{\dot{\phi} \dot{\phi}} L]^{-1} [\nabla_\phi L - \nabla^2_{\phi \dot{\phi}} L \, \dot{\phi} - \frac{\partial}{\partial t} \nabla_{\dot{\phi}} L]
-$$
+
 ```
 
 
-Multiply both sides by the inverse (if it exists) of the Hessian $ \nabla^2_{\dot{\phi} \dot{\phi}} L $:
+Multiply both sides by the inverse (if it exists) of the Hessian `\nabla^2_{\dot{\phi} \dot{\phi}} L `:
 
 
 
