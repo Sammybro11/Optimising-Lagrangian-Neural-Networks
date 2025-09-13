@@ -44,10 +44,10 @@ pip install -r requirements.txt
 ## Theory
 Let us consider the case of a simple Pendulum
 
-The **Lagrangian** $`L(\phi, \dot{\phi}, t)`$ describes the motion of a system, where:
+The **Lagrangian** $`L(\phi, \dot{\phi}, t)`$ describes the motion of the pendulum, where:
 - $`\phi `$ = Vertical angle of Pendulum from support
 - $`\dot{\phi}`$ = Angular velocity of Pendulum from support
-- $`t`$= Time variable
+- $`t`$ = Time variable
 
 The Euler-Lagrange equation is:
 ```math
@@ -72,8 +72,26 @@ By applying Chain Rule
 Therefore,
 ```math
 \ddot{\phi} = [\nabla^2_{\dot{\phi} \dot{\phi}} L]^{-1} [\nabla_\phi L - \nabla^2_{\phi \dot{\phi}} L \, \dot{\phi} - \frac{\partial}{\partial t} \nabla_{\dot{\phi}} L]
-
 ```
+---
+
+## Model Structure
+
+The second time derivative obtained from the LNN + Euler Lagrange Equation ( `src/Model.py` )
+is used to obtain the next time step values of the state variables of the 
+system using RK4 Method ( `src/Simulation.py` ).
+This is then used to obtain Mean Squared Error Loss used in backpropagation using Adam Optimizer.
+
+![Model_Struct](https://www.researchgate.net/publication/355142323/figure/fig1/AS:1078319500013570@1634102811778/Momentum-conserving-Lagrangian-neural-network.png)
+
+## Analysis of Simple Pendulum
+
+## Analysis of Pendulum on Moving Support
+
+## Analysis of Duffing Oscillator
+
+
+
 
 
 
